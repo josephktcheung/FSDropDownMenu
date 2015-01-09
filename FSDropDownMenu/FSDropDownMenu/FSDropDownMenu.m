@@ -32,18 +32,18 @@
         _height = height;
         
         //tableView init
-        _leftTableView = [[UITableView alloc] initWithFrame:CGRectMake(origin.x, self.frame.origin.y + self.frame.size.height, ScreenWidth*0.7, 0) style:UITableViewStylePlain];
+        _leftTableView = [[UITableView alloc] initWithFrame:CGRectMake(origin.x, self.frame.origin.y + self.frame.size.height, ScreenWidth*0.3, 0) style:UITableViewStylePlain];
         _leftTableView.rowHeight = 38;
         _leftTableView.dataSource = self;
         _leftTableView.delegate = self;
+        _leftTableView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.f];
+        _leftTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
-        
-        _rightTableView = [[UITableView alloc] initWithFrame:CGRectMake(origin.x+ScreenWidth*0.7, self.frame.origin.y + self.frame.size.height, ScreenWidth*0.3, 0) style:UITableViewStylePlain];
+        _rightTableView = [[UITableView alloc] initWithFrame:CGRectMake(origin.x+ScreenWidth*0.3, self.frame.origin.y + self.frame.size.height, ScreenWidth*0.7, 0) style:UITableViewStylePlain];
         _rightTableView.rowHeight = 38;
         _rightTableView.dataSource = self;
         _rightTableView.delegate = self;
-        _rightTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _rightTableView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.f];
+        
         
         //self tapped
         self.backgroundColor = [UIColor whiteColor];
@@ -70,11 +70,12 @@
 - (void)menuTapped{
     if (!_show) {
         NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-        [self.rightTableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        [self.leftTableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     }
     [self animateBackGroundView:self.backGroundView show:!_show complete:^{
         [self animateTableViewShow:!_show complete:^{
-            [self tableView:self.rightTableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+            if (!_show) [self tableView:self.leftTableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+            
             _show = !_show;
         }];
     }];
@@ -114,16 +115,19 @@
 - (void)animateTableViewShow:(BOOL)show complete:(void(^)())complete {
     if (show) {
 
-        _leftTableView.frame = CGRectMake(self.origin.x, self.frame.origin.y, ScreenWidth*0.7, 0);
+        _leftTableView.frame = CGRectMake(self.origin.x, self.frame.origin.y, ScreenWidth*0.3, 0);
         [self.superview addSubview:_leftTableView];
-        _rightTableView.frame = CGRectMake(self.origin.x+ScreenWidth*0.7, self.frame.origin.y, ScreenWidth*0.3, 0);
+        _rightTableView.frame = CGRectMake(self.origin.x+ScreenWidth*0.3, self.frame.origin.y, ScreenWidth*0.7, 0);
+        
         [self.superview addSubview:_rightTableView];
         
         _leftTableView.alpha = 1.f;
         _rightTableView.alpha = 1.f;
+
         [UIView animateWithDuration:0.2 animations:^{
-            _leftTableView.frame = CGRectMake(self.origin.x, self.frame.origin.y, ScreenWidth*0.7, _height);
-            _rightTableView.frame = CGRectMake(self.origin.x+ScreenWidth*0.7, self.frame.origin.y, ScreenWidth*0.3, _height);
+            _leftTableView.frame = CGRectMake(self.origin.x, self.frame.origin.y, ScreenWidth*0.3, _height);
+            _rightTableView.frame = CGRectMake(self.origin.x+ScreenWidth*0.3, self.frame.origin.y, ScreenWidth*0.7, _height);
+            
             if (self.transformView) {
                 self.transformView.transform = CGAffineTransformMakeRotation(M_PI);
             }
@@ -172,7 +176,7 @@
     } else {
         NSAssert(0 == 1, @"dataSource method needs to be implemented");
     }
-    if(tableView == _leftTableView){
+    if(tableView == _rightTableView){
         cell.backgroundColor = [UIColor whiteColor];
     }else{
         UIView *sView = [[UIView alloc] init];
@@ -184,15 +188,13 @@
     cell.textLabel.font = [UIFont systemFontOfSize:14.0];
     cell.separatorInset = UIEdgeInsetsZero;
     
-
-    
     return cell;
 }
 
 #pragma mark - tableview delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.delegate || [self.delegate respondsToSelector:@selector(menu:tableView:didSelectRowAtIndexPath:)]) {
-        if (tableView == self.leftTableView) {
+        if (tableView == self.rightTableView) {
             [self animateBackGroundView:_backGroundView show:NO complete:^{
                 [self animateTableViewShow:NO complete:^{
                     _show = NO;
