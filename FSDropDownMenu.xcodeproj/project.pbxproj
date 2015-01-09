@@ -14,6 +14,8 @@
 		D3E2145C1A411C2B0031BE7F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3E2145B1A411C2B0031BE7F /* Images.xcassets */; };
 		D3E2145F1A411C2B0031BE7F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3E2145D1A411C2B0031BE7F /* LaunchScreen.xib */; };
 		D3E2146B1A411C2B0031BE7F /* FSDropDownMenuTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D3E2146A1A411C2B0031BE7F /* FSDropDownMenuTests.m */; };
+		D3E214771A411C5B0031BE7F /* FSDropDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D3E214761A411C5B0031BE7F /* FSDropDownMenu.m */; };
+		D3E902801A428E66002A7F7A /* expandableImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3E9027F1A428E66002A7F7A /* expandableImage@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,9 @@
 		D3E214641A411C2B0031BE7F /* FSDropDownMenuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FSDropDownMenuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3E214691A411C2B0031BE7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3E2146A1A411C2B0031BE7F /* FSDropDownMenuTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FSDropDownMenuTests.m; sourceTree = "<group>"; };
+		D3E214751A411C5B0031BE7F /* FSDropDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSDropDownMenu.h; sourceTree = "<group>"; };
+		D3E214761A411C5B0031BE7F /* FSDropDownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSDropDownMenu.m; sourceTree = "<group>"; };
+		D3E9027F1A428E66002A7F7A /* expandableImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "expandableImage@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,10 +86,12 @@
 		D3E2144D1A411C2B0031BE7F /* FSDropDownMenu */ = {
 			isa = PBXGroup;
 			children = (
+				D3E214741A411C440031BE7F /* FSDropDownMenu */,
 				D3E214521A411C2B0031BE7F /* AppDelegate.h */,
 				D3E214531A411C2B0031BE7F /* AppDelegate.m */,
 				D3E214551A411C2B0031BE7F /* ViewController.h */,
 				D3E214561A411C2B0031BE7F /* ViewController.m */,
+				D3E9027F1A428E66002A7F7A /* expandableImage@2x.png */,
 				D3E214581A411C2B0031BE7F /* Main.storyboard */,
 				D3E2145B1A411C2B0031BE7F /* Images.xcassets */,
 				D3E2145D1A411C2B0031BE7F /* LaunchScreen.xib */,
@@ -117,6 +124,15 @@
 				D3E214691A411C2B0031BE7F /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D3E214741A411C440031BE7F /* FSDropDownMenu */ = {
+			isa = PBXGroup;
+			children = (
+				D3E214751A411C5B0031BE7F /* FSDropDownMenu.h */,
+				D3E214761A411C5B0031BE7F /* FSDropDownMenu.m */,
+			);
+			path = FSDropDownMenu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3E2145A1A411C2B0031BE7F /* Main.storyboard in Resources */,
+				D3E902801A428E66002A7F7A /* expandableImage@2x.png in Resources */,
 				D3E2145F1A411C2B0031BE7F /* LaunchScreen.xib in Resources */,
 				D3E2145C1A411C2B0031BE7F /* Images.xcassets in Resources */,
 			);
@@ -221,6 +238,7 @@
 			files = (
 				D3E214571A411C2B0031BE7F /* ViewController.m in Sources */,
 				D3E214541A411C2B0031BE7F /* AppDelegate.m in Sources */,
+				D3E214771A411C5B0031BE7F /* FSDropDownMenu.m in Sources */,
 				D3E214511A411C2B0031BE7F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -412,6 +430,7 @@
 				D3E214701A411C2B0031BE7F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D3E214711A411C2B0031BE7F /* Build configuration list for PBXNativeTarget "FSDropDownMenuTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +439,7 @@
 				D3E214731A411C2B0031BE7F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
