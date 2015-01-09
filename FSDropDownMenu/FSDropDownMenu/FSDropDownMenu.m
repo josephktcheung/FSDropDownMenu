@@ -36,13 +36,14 @@
         _leftTableView.rowHeight = 38;
         _leftTableView.dataSource = self;
         _leftTableView.delegate = self;
+        _leftTableView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.f];
+        _leftTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
         _rightTableView = [[UITableView alloc] initWithFrame:CGRectMake(origin.x+ScreenWidth*0.3, self.frame.origin.y + self.frame.size.height, ScreenWidth*0.7, 0) style:UITableViewStylePlain];
         _rightTableView.rowHeight = 38;
         _rightTableView.dataSource = self;
         _rightTableView.delegate = self;
-        _rightTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _rightTableView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.f];
+        
         
         //self tapped
         self.backgroundColor = [UIColor whiteColor];
@@ -73,7 +74,8 @@
     }
     [self animateBackGroundView:self.backGroundView show:!_show complete:^{
         [self animateTableViewShow:!_show complete:^{
-            [self tableView:self.leftTableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+            if (!_show) [self tableView:self.leftTableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+            
             _show = !_show;
         }];
     }];
@@ -174,7 +176,7 @@
     } else {
         NSAssert(0 == 1, @"dataSource method needs to be implemented");
     }
-    if(tableView == _leftTableView){
+    if(tableView == _rightTableView){
         cell.backgroundColor = [UIColor whiteColor];
     }else{
         UIView *sView = [[UIView alloc] init];
@@ -185,8 +187,6 @@
     }
     cell.textLabel.font = [UIFont systemFontOfSize:14.0];
     cell.separatorInset = UIEdgeInsetsZero;
-    
-
     
     return cell;
 }
