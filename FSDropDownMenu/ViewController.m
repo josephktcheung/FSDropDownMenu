@@ -75,14 +75,14 @@
 #pragma mark - FSDropDown datasource & delegate
 
 - (NSInteger)menu:(FSDropDownMenu *)menu tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section{
-    if (tableView == menu.rightTableView) {
+    if (tableView == menu.leftTableView) {
         return _cityArr.count;
     }else{
         return _currentAreaArr.count;
     }
 }
 - (NSString *)menu:(FSDropDownMenu *)menu tableView:(UITableView*)tableView titleForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (tableView == menu.rightTableView) {
+    if (tableView == menu.leftTableView) {
 
         return _cityArr[indexPath.row];
     }else{
@@ -93,9 +93,9 @@
 
 - (void)menu:(FSDropDownMenu *)menu tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    if(tableView == menu.rightTableView){
+    if(tableView == menu.leftTableView){
         _currentAreaArr = _areaArr[indexPath.row];
-        [menu.leftTableView reloadData];
+        [menu.rightTableView reloadData];
     }else{
         [self resetItemSizeBy:_currentAreaArr[indexPath.row]];
     }
